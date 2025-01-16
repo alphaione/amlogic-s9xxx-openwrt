@@ -8,8 +8,8 @@
 
 # ------------------------------- Main source started -------------------------------
 #
-# Modify default theme（FROM uci-theme-bootstrap CHANGE TO luci-theme-material）
-# sed -i 's/luci-theme-bootstrap/luci-theme-material/g' ./feeds/luci/collections/luci/Makefile
+# Modify default theme（FROM uci-theme-material CHANGE TO luci-theme-argon）
+sed -i 's/luci-theme-material/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
 
 # Add autocore support for armvirt
 sed -i 's/TARGET_rockchip/TARGET_rockchip\|\|TARGET_armvirt/g' package/lean/autocore/Makefile
@@ -18,8 +18,8 @@ sed -i 's/TARGET_rockchip/TARGET_rockchip\|\|TARGET_armvirt/g' package/lean/auto
 sed -i "s|DISTRIB_REVISION='.*'|DISTRIB_REVISION='R$(date +%Y.%m.%d)'|g" package/lean/default-settings/files/zzz-default-settings
 echo "DISTRIB_SOURCECODE='lede'" >>package/base-files/files/etc/openwrt_release
 
-# Modify default IP（FROM 192.168.1.1 CHANGE TO 192.168.31.4）
-# sed -i 's/192.168.1.1/192.168.31.4/g' package/base-files/files/bin/config_generate
+# Modify default IP（FROM 192.168.1.1 CHANGE TO 192.168.5.100）
+sed -i 's/192.168.1.1/192.168.5.100/g' package/base-files/files/bin/config_generate
 
 # Replace the default software source
 # sed -i 's#openwrt.proxy.ustclug.org#mirrors.bfsu.edu.cn\\/openwrt#' package/lean/default-settings/files/zzz-default-settings
@@ -34,6 +34,15 @@ git clone https://github.com/ophub/luci-app-amlogic.git package/luci-app-amlogic
 #
 # Apply patch
 # git apply ../config/patches/{0001*,0002*}.patch --directory=feeds/luci
+# Add luci-theme-argon
+rm -rf package/lean/luci-theme-argon
+git clone https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
+#Add luci-app-partexp
+rm -rf package/luci-app-partexp
+git clone https://github.com/sirpdboy/luci-app-partexp.git package/luci-app-partexp
 #
+#假装istoreos
+rm -rf package/luci-app-quickstart
+git clone https://github.com/animegasan/luci-app-quickstart.git package/luci-app-quickstart
 # ------------------------------- Other ends -------------------------------
 
