@@ -133,6 +133,10 @@ custom_packages() {
     git clone https://github.com/kenzok8/openwrt-packages.git kenzok8-packages
     [[ "${?}" -eq "0" ]] || error_msg "Failed to clone kenzok8/openwrt-packages repository!"
 
+				./scripts/feeds update -a
+				./scripts/feeds install -a
+
+
     # Compile plugins from kenzok8/openwrt-packages
     cd kenzok8-packages
     echo -e "${INFO} Compiling plugins from kenzok8/openwrt-packages..."
