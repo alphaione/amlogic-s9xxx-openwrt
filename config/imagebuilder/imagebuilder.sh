@@ -128,6 +128,7 @@ custom_packages() {
 
     # Download other luci-app-xxx
     # ......
+				cd ${imagebuilder_path}
     # Clone kenzok8/openwrt-packages repository
     echo -e "${INFO} Cloning kenzok8/openwrt-packages repository..."
     git clone https://github.com/kenzok8/openwrt-packages.git kenzok8-packages
