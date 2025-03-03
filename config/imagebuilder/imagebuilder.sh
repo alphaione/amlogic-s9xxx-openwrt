@@ -112,6 +112,27 @@ custom_packages() {
     [[ -d "packages" ]] || mkdir packages
     cd packages
 
+    # 克隆 kenzok8/openwrt-packages 仓库
+    PLUGIN_REPO_URL="https://github.com/kenzok8/openwrt-packages.git"
+    PLUGIN_DIR="openwrt-packages"
+    git clone ${PLUGIN_REPO_URL}
+    cd ${PLUGIN_DIR}
+
+    # 为每个插件目录编译插件
+    for plugin in $(ls -d */); do
+        cd ${plugin}
+        make
+        cd ..
+    done
+
+    # 假设编译生成的ipk文件位于各插件目录的bin目录下，将其复制到Image Builder的packages目录中
+    for plugin in $(ls -d */); do
+        find . -name "*.ipk" -exec cp {} ${imagebuilder_path}/packages/ \;
+    done
+
+    # 返回到 Image Builder 目录继续其他操作
+    cd packages
+
     # Download luci-app-amlogic
     amlogic_api="https://api.github.com/repos/ophub/luci-app-amlogic/releases"
     #
