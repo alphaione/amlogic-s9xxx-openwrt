@@ -370,7 +370,7 @@ jobs:
           [[ -d "ipks" ]] || mkdir ipks
           cp -f bin/targets/*/*/*rootfs.tar.gz output/
           cp -f .config output/config
-          cp -f bin/*/*/*.ipk ipks/
+          cp -f bin/targets/*/*/*.ipk ipks/
           rm -rf $(ls . | grep -v -E "^(output|ipks)$" | xargs) 2>/dev/null
 
           # Generate sha256sum file
