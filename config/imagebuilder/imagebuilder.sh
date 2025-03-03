@@ -111,28 +111,6 @@ custom_packages() {
     # Create a [ packages ] directory
     [[ -d "packages" ]] || mkdir packages
     cd packages
-
-    # 克隆 kenzok8/openwrt-packages 仓库
-    PLUGIN_REPO_URL="https://github.com/kenzok8/openwrt-packages.git"
-    PLUGIN_DIR="openwrt-packages"
-    git clone ${PLUGIN_REPO_URL}
-    cd ${PLUGIN_DIR}
-
-    # 为每个插件目录编译插件
-    for plugin in $(ls -d */); do
-        cd ${plugin}
-        make
-        cd ..
-    done
-
-    # 假设编译生成的ipk文件位于各插件目录的bin目录下，将其复制到Image Builder的packages目录中
-    for plugin in $(ls -d */); do
-        find . -name "*.ipk" -exec cp {} ${imagebuilder_path}/packages/ \;
-    done
-
-    # 返回到 Image Builder 目录继续其他操作
-    cd packages
-
     # Download luci-app-amlogic
     amlogic_api="https://api.github.com/repos/ophub/luci-app-amlogic/releases"
     #
@@ -150,6 +128,22 @@ custom_packages() {
 
     # Download other luci-app-xxx
     # ......
+    # Clone kenzok8/openwrt-packages repository
+    echo -e "${INFO} Cloning kenzok8/openwrt-packages repository..."
+    git clone https://github.com/kenzok8/openwrt-packages.git kenzok8-packages
+    [[ "${?}" -eq "0" ]] || error_msg "Failed to clone kenzok8/openwrt-packages repository!"
+
+    # Compile plugins from kenzok8/openwrt-packages
+    cd kenzok8-packages
+    echo -e "${INFO} Compiling plugins from kenzok8/openwrt-packages..."
+    for plugin_dir in *; do
+        if [[ -d "${plugin_dir}" ]]; then
+            echo -e "${INFO} Compiling plugin: ${plugin_dir}"
+            make -C "${plugin_dir}" compile
+            [[ "${?}" -eq "0" ]] || error_msg "Failed to compile plugin: ${plugin_dir}"
+            cp -f "${plugin_dir}/bin/packages/*/*.ipk" ../../
+        fi
+    done
 
     sync && sleep 3
     echo -e "${INFO} [ packages ] directory status: $(ls -al 2>/dev/null)"
