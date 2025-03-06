@@ -382,12 +382,6 @@ jobs:
           df -hT ${PWD}
           echo "status=success" >> ${GITHUB_OUTPUT}
 
-      - name: Upload IPK files
-        uses: actions/upload-artifact@main
-        with:
-          name: ipk-file
-          path: openwrt/ipks
-
       - name: Upload OpenWrt to Release
         uses: ncipollo/release-action@main
         if: ${{ steps.clean.outputs.status }} == 'success' && !cancelled()
