@@ -199,7 +199,6 @@ rebuild_firmware() {
         \
         luci-app-amlogic luci-i18n-amlogic-zh-cn \
         luci-app-adguardhome luci-app-alist luci-app-mosdns luci-app-quickstart \
-        quickstart adguardhome alist mosdns lucky tailscale \
         \
         ${config_list} \
         "
