@@ -132,7 +132,6 @@ custom_packages() {
     curl -fLJO luci-app-adguardhome.ipk https://op.dllkids.xyz/packages/aarch64_generic/luci-app-adguardhome_26.048.31422~27758ea_all.ipk
     curl -fLJO luci-app-alist.ipk https://op.dllkids.xyz/packages/aarch64_generic/luci-app-alist_git-25.279.30465-b83765c_all.ipk
     curl -fLJO luci-app-mosdns.ipk https://op.dllkids.xyz/packages/aarch64_generic/luci-app-mosdns_26.062.31419~59778d0_all.ipk
-    curl -fLJO luci-app-dockerman.ipk https://op.dllkids.xyz/packages/aarch64_generic/luci-app-dockerman_v0.5.26_all.ipk
     curl -fLJO luci-app-quickstart.ipk https://op.dllkids.xyz/packages/aarch64_generic/luci-app-quickstart_git-25.193.31097-8f4ce37_all.ipk
     curl -fLJO quickstart.ipk https://op.dllkids.xyz/packages/aarch64_generic/quickstart_0.9.7-r97_aarch64_generic.ipk
     curl -fLJO luci-app-lucky.ipk https://op.dllkids.xyz/packages/aarch64_generic/luci-app-lucky_git-25.191.31136-d07a71c_all.ipk
@@ -198,7 +197,7 @@ rebuild_firmware() {
         luci-proto-ncm luci-proto-openconnect luci-proto-ppp luci-proto-qmi luci-proto-relay \
         \
         luci-app-amlogic luci-i18n-amlogic-zh-cn \
-        luci-app-adguardhome luci-app-alist luci-app-mosdns luci-app-dockerman luci-app-quickstart \
+        luci-app-adguardhome luci-app-alist luci-app-mosdns luci-app-quickstart \
         quickstart adguardhome alist mosdns lucky tailscale \
         \
         ${config_list} \
