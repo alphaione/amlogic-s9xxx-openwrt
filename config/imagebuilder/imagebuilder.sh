@@ -136,6 +136,7 @@ custom_packages() {
     curl -fsO https://op.dllkids.xyz/packages/aarch64_generic/quickstart_0.9.7-r97_aarch64_generic.ipk
     curl -fsO https://op.dllkids.xyz/packages/aarch64_generic/luci-app-lucky_git-25.191.31136-d07a71c_all.ipk
     curl -fsO https://op.dllkids.xyz/packages/aarch64_generic/lucky_2.15.7-r369_aarch64_generic.ipk
+
     sync && sleep 3
     echo -e "${INFO} [ packages ] directory status: $(ls -al 2>/dev/null)"
 }
