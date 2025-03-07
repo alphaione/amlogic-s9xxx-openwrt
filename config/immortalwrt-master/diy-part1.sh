@@ -15,12 +15,12 @@ sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.con
 # other
 # rm -rf package/lean/{samba4,luci-app-samba4,luci-app-ttyd}
 
-rm -rf feeds/luci/applications/luci-app-mosdns
-rm -rf feeds/packages/net/{alist,adguardhome,mosdns,xray*,v2ray*,v2ray*,sing*,smartdns}
-rm -rf feeds/packages/utils/v2dat
+#rm -rf feeds/luci/applications/luci-app-mosdns
+#rm -rf feeds/packages/net/{alist,adguardhome,mosdns,xray*,v2ray*,v2ray*,sing*,smartdns}
+#rm -rf feeds/packages/utils/v2dat
 #使用golang版本1.22以上版本
-rm -rf feeds/packages/lang/golang
-git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
+#rm -rf feeds/packages/lang/golang
+#git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 # other
 # rm -rf package/emortal/{autosamba,ipv6-helper}
 
