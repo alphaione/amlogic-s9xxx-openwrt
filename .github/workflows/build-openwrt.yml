@@ -21,7 +21,7 @@ on:
       openwrt_board:
         description: "Select device board"
         required: false
-        default: "all"
+        default: "s905l3b"
         type: choice
         options:
           - all
@@ -177,7 +177,7 @@ on:
       openwrt_kernel:
         description: "Select kernel version"
         required: false
-        default: "6.1.y_6.12.y"
+        default: "6.6.y_6.12.y"
         type: choice
         options:
           - 5.4.y
@@ -303,7 +303,7 @@ jobs:
               TAGS_NAME="lede"
           elif [[ "${{ inputs.source_branch }}" == *"immortalwrt"* ]]; then
               REPO_URL="https://github.com/immortalwrt/immortalwrt"
-              REPO_BRANCH="master"
+              REPO_BRANCH="openwrt-24.10"
               TAGS_NAME="immortalwrt"
           else
               echo "Unknown source code repository."
