@@ -129,6 +129,7 @@ custom_packages() {
 
     # Download other luci-app-xxx
     # ......
+    cd packages
     curl -fsO https://op.dllkids.xyz/packages/aarch64_generic/luci-app-adguardhome_26.048.31422~27758ea_all.ipk
     curl -fsO https://op.dllkids.xyz/packages/aarch64_generic/luci-app-alist_git-25.279.30465-b83765c_all.ipk
     curl -fsO https://op.dllkids.xyz/packages/aarch64_generic/luci-app-mosdns_26.062.31419~59778d0_all.ipk
