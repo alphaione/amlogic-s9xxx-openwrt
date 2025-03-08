@@ -140,8 +140,7 @@ custom_packages() {
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/luci-app-lucky_git-25.191.31136-d07a71c_all.ipk
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/lucky_2.15.7-r369_aarch64_generic.ipk
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/tailscale_1.80.2-r37_aarch64_generic.ipk
-    curl -O https://github.com/asvow/luci-app-tailscale/releases/download/v1.2.3/luci-app-tailscale_1.2.3_all.ipk
-    curl -O https://github.com/asvow/luci-app-tailscale/releases/download/v1.2.3/luci-i18n-tailscale-zh-cn_241106.35527_all.ipk
+    curl -O https://dl.openwrt.ai/releases/24.10/packages/aarch64_generic/kiddin9/luci-app-tailscale_26.057.44252~a27aeb1_all.ipk
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/luci-theme-argon_26.044.31345~8d9f8c1_all.ipk
 
     sync && sleep 3
@@ -206,7 +205,7 @@ rebuild_firmware() {
         \
         luci-app-amlogic luci-i18n-amlogic-zh-cn \
         luci-app-adguardhome luci-app-alist luci-app-mosdns luci-app-quickstart \
-        luci-app-tailscale luci-i18n-tailscale-zh-cn \
+        luci-app-tailscale \
         luci-theme-argon \
         \
         ${config_list} \
