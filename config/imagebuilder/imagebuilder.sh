@@ -140,6 +140,8 @@ custom_packages() {
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/luci-app-lucky_git-25.191.31136-d07a71c_all.ipk
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/lucky_2.15.7-r369_aarch64_generic.ipk
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/tailscale_1.80.2-r37_aarch64_generic.ipk
+    curl -O https://op.dllkids.xyz/packages/aarch64_generic/luci-theme-argon_26.044.31345~8d9f8c1_all.ipk
+    curl -O https://op.dllkids.xyz/packages/aarch64_generic/luci-theme-design_new_git-25.238.31236-7c346e4_all.ipk
 
     sync && sleep 3
     echo -e "${INFO} [ packages ] directory status: $(ls -al 2>/dev/null)"
@@ -203,6 +205,7 @@ rebuild_firmware() {
         \
         luci-app-amlogic luci-i18n-amlogic-zh-cn \
         luci-app-adguardhome luci-app-alist luci-app-mosdns luci-app-quickstart \
+        luci-theme-argon luci-theme-design \
         \
         ${config_list} \
         "
