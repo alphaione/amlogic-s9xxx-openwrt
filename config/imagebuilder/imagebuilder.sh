@@ -129,14 +129,18 @@ custom_packages() {
 
     # Download other luci-app-xxx
     # ......
-    cd packages
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/luci-app-adguardhome_26.048.31422~27758ea_all.ipk
+    curl -O https://op.dllkids.xyz/packages/aarch64_generic/adguardhome_0.107.56-r303_aarch64_generic.ipk
+    curl -O https://op.dllkids.xyz/packages/aarch64_generic/alist_3.42.0-r119_aarch64_generic.ipk
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/luci-app-alist_git-25.279.30465-b83765c_all.ipk
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/luci-app-mosdns_26.062.31419~59778d0_all.ipk
+    curl -O https://op.dllkids.xyz/packages/aarch64_generic/mosdns_5.3.3-r565_aarch64_generic.ipk
+    curl -O https://op.dllkids.xyz/packages/aarch64_generic/v2dat_2022-12-15-47b8ee51-10_aarch64_generic.ipk
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/luci-app-quickstart_git-25.193.31097-8f4ce37_all.ipk
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/quickstart_0.9.7-r97_aarch64_generic.ipk
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/luci-app-lucky_git-25.191.31136-d07a71c_all.ipk
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/lucky_2.15.7-r369_aarch64_generic.ipk
+    curl -O https://op.dllkids.xyz/packages/aarch64_generic/tailscale_1.80.2-r37_aarch64_generic.ipk
 
     sync && sleep 3
     echo -e "${INFO} [ packages ] directory status: $(ls -al 2>/dev/null)"
