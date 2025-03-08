@@ -137,8 +137,8 @@ custom_packages() {
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/v2dat_2022-12-15-47b8ee51-10_aarch64_generic.ipk
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/luci-app-quickstart_git-25.193.31097-8f4ce37_all.ipk
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/quickstart_0.9.7-r97_aarch64_generic.ipk
-    curl -O https://op.dllkids.xyz/packages/aarch64_generic/luci-app-lucky_git-25.191.31136-d07a71c_all.ipk
-    curl -O https://op.dllkids.xyz/packages/aarch64_generic/lucky_2.15.7-r369_aarch64_generic.ipk
+    curl -O https://dl.openwrt.ai/releases/24.10/packages/aarch64_generic/kiddin9/luci-app-lucky_26.057.44252~a27aeb1_all.ipk
+    curl -O https://dl.openwrt.ai/releases/24.10/packages/aarch64_generic/kiddin9/lucky_2.15.7-r4_aarch64_generic.ipk
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/tailscale_1.80.2-r37_aarch64_generic.ipk
     curl -O https://dl.openwrt.ai/releases/24.10/packages/aarch64_generic/kiddin9/luci-app-tailscale_26.057.44252~a27aeb1_all.ipk
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/luci-theme-argon_26.044.31345~8d9f8c1_all.ipk
