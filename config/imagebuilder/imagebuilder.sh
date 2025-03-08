@@ -131,7 +131,6 @@ custom_packages() {
     # ......
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/luci-app-adguardhome_26.048.31422~27758ea_all.ipk
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/adguardhome_0.107.56-r303_aarch64_generic.ipk
-    curl -O https://op.dllkids.xyz/packages/aarch64_generic/alist_3.42.0-r119_aarch64_generic.ipk
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/luci-app-alist_git-25.279.30465-b83765c_all.ipk
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/luci-app-mosdns_26.062.31419~59778d0_all.ipk
     curl -O https://op.dllkids.xyz/packages/aarch64_generic/mosdns_5.3.3-r565_aarch64_generic.ipk
@@ -186,7 +185,7 @@ rebuild_firmware() {
 
     # Selecting default packages, lib, theme, app and i18n, etc.
     my_packages="\
-        acpid attr base-files bash bc blkid block-mount blockd bsdtar btrfs-progs busybox bzip2 \
+        uci acpid attr base-files bash bc blkid block-mount blockd bsdtar btrfs-progs busybox bzip2 \
         cgi-io chattr comgt comgt-ncm containerd coremark coreutils coreutils-base64 coreutils-nohup \
         coreutils-truncate curl docker docker-compose dockerd dosfstools dumpe2fs e2freefrag e2fsprogs \
         exfat-mkfs f2fs-tools f2fsck fdisk gawk getopt git gzip hostapd-common iconv iw iwinfo jq \
