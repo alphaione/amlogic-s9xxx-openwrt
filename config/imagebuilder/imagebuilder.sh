@@ -129,36 +129,14 @@ custom_packages() {
 
     # Download other luci-app-xxx
     # ......
-# Define the base URL for the downloads
-base_url="https://dl.openwrt.ai/releases/24.10/packages/aarch64_generic/kiddin9"
+BASE_URL="https://dl.openwrt.ai/releases/24.10/packages/aarch64_generic/kiddin9"
 
-# Define the file name patterns to search for
-file_patterns=("lucky" "tailscale" "mosdns" "adguardhome" "quickstart" "design" "argon" "openclash")
+wget -q -O - "$BASE_URL" | \
+grep -oP 'href="\K[^"]*\.ipk' | \
+grep -E 'lucky|tailscale|mosdns|quickstart|adguardhome|openclash|dockerman|design|argon' | \
+sed "s|^|$BASE_URL/|" | \
+xargs -n 1 wget
 
-# Loop through the file patterns and download each matching file
-for pattern in "${file_patterns[@]}"; do
-    # Get the download URL for the file that matches the pattern
-    file_url=$(curl -s ${base_url}/ | grep -oE "href=\"${pattern}.*.ipk\"" | sed 's/href="//' | sed 's/"//' | head -n 1)
-    
-    # Check if a file URL was found
-    if [ -z "$file_url" ]; then
-        echo "No file found matching the pattern ${pattern}"
-        continue
-    fi
-
-    # Construct the full download URL
-    download_url="${base_url}/${file_url}"
-
-    # Download the file
-    curl -O ${download_url}
-
-    # Check if the download was successful
-    if [ "${?}" -eq "0" ]; then
-        echo "The file [ ${file_url} ] has been downloaded successfully."
-    else
-        echo "Failed to download the file [ ${file_url} ]."
-    fi
-done
 
     sync && sleep 3
     echo -e "${INFO} [ packages ] directory status: $(ls -al 2>/dev/null)"
