@@ -2,7 +2,9 @@ name: Build Small-Package Plugins
 
 on:
   workflow_dispatch:
-    
+env:
+  TZ: America/New_York
+
 jobs:
   build-plugins:
     runs-on: ubuntu-22.04
