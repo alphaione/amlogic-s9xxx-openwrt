@@ -133,7 +133,7 @@ custom_packages() {
 base_url="https://dl.openwrt.ai/releases/24.10/packages/aarch64_generic/kiddin9"
 
 # Define the file name patterns to search for
-file_patterns=("lucky" "tailscale" "mosdns" "adguardhome" "quickstart" "design" "argon" "dockerman" "openclash")
+file_patterns=("lucky" "tailscale" "mosdns" "adguardhome" "quickstart" "design" "argon" "openclash")
 
 # Loop through the file patterns and download each matching file
 for pattern in "${file_patterns[@]}"; do
