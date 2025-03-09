@@ -133,7 +133,7 @@ BASE_URL="https://dl.openwrt.ai/releases/24.10/packages/aarch64_generic/kiddin9"
 
 wget -q -O - "$BASE_URL" | \
 grep -oP 'href="\K[^"]*\.ipk' | \
-grep -E 'lucky|tailscale|mosdns|quickstart|adguardhome|openclash|dockerman|design|argon' | \
+grep -E 'lucky|tailscale|mosdns|quickstart|adguardhome|openclash|v2dat|design|argon' | \
 sed "s|^|$BASE_URL/|" | \
 xargs -n 1 wget
 
@@ -199,7 +199,7 @@ rebuild_firmware() {
         luci-proto-ncm luci-proto-openconnect luci-proto-ppp luci-proto-qmi luci-proto-relay \
         \
         luci-app-amlogic luci-i18n-amlogic-zh-cn \
-        luci-app-adguardhome luci-app-mosdns luci-app-quickstart luci-app-dockerman luci-app-openclash luci-app-lucky luci-app-tailscale \
+        luci-app-adguardhome luci-app-mosdns luci-app-quickstart luci-app-openclash luci-app-lucky luci-app-tailscale \
         luci-theme-design luci-theme-argon \
         \
         ${config_list} \
