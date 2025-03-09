@@ -129,13 +129,36 @@ custom_packages() {
 
     # Download other luci-app-xxx
     # ......
-    curl -fsO https://op.dllkids.xyz/packages/aarch64_generic/luci-app-adguardhome_26.048.31422~27758ea_all.ipk
-    curl -fsO https://op.dllkids.xyz/packages/aarch64_generic/luci-app-alist_git-25.279.30465-b83765c_all.ipk
-    curl -fsO https://op.dllkids.xyz/packages/aarch64_generic/luci-app-mosdns_26.062.31419~59778d0_all.ipk
-    curl -fsO https://op.dllkids.xyz/packages/aarch64_generic/luci-app-quickstart_git-25.193.31097-8f4ce37_all.ipk
-    curl -fsO https://op.dllkids.xyz/packages/aarch64_generic/quickstart_0.9.7-r97_aarch64_generic.ipk
-    curl -fsO https://op.dllkids.xyz/packages/aarch64_generic/luci-app-lucky_git-25.191.31136-d07a71c_all.ipk
-    curl -fsO https://op.dllkids.xyz/packages/aarch64_generic/lucky_2.15.7-r369_aarch64_generic.ipk
+# Define the base URL for the downloads
+base_url="https://dl.openwrt.ai/releases/24.10/packages/aarch64_generic/kiddin9"
+
+# Define the file name patterns to search for
+file_patterns=("lucky" "tailscale" "mosdns" "adguardhome" "quickstart" "design" "argon" "dockerman" "openclash")
+
+# Loop through the file patterns and download each matching file
+for pattern in "${file_patterns[@]}"; do
+    # Get the download URL for the file that matches the pattern
+    file_url=$(curl -s ${base_url}/ | grep -oE "href=\"${pattern}.*.ipk\"" | sed 's/href="//' | sed 's/"//' | head -n 1)
+    
+    # Check if a file URL was found
+    if [ -z "$file_url" ]; then
+        echo "No file found matching the pattern ${pattern}"
+        continue
+    fi
+
+    # Construct the full download URL
+    download_url="${base_url}/${file_url}"
+
+    # Download the file
+    curl -O ${download_url}
+
+    # Check if the download was successful
+    if [ "${?}" -eq "0" ]; then
+        echo "The file [ ${file_url} ] has been downloaded successfully."
+    else
+        echo "Failed to download the file [ ${file_url} ]."
+    fi
+done
 
     sync && sleep 3
     echo -e "${INFO} [ packages ] directory status: $(ls -al 2>/dev/null)"
@@ -198,7 +221,8 @@ rebuild_firmware() {
         luci-proto-ncm luci-proto-openconnect luci-proto-ppp luci-proto-qmi luci-proto-relay \
         \
         luci-app-amlogic luci-i18n-amlogic-zh-cn \
-        luci-app-adguardhome luci-app-alist luci-app-mosdns luci-app-quickstart \
+        luci-app-adguardhome luci-app-mosdns luci-app-quickstart luci-app-dockerman luci-app-openclash luci-app-lucky luci-app-tailscale \
+        luci-theme-design luci-theme-argon \
         \
         ${config_list} \
         "
