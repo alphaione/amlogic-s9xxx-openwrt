@@ -58,7 +58,6 @@ jobs:
         run: |
           git clone https://github.com/immortalwrt/immortalwrt openwrt
           cd openwrt
-          > feeds.conf.default
           echo "src-git smpackage https://github.com/kenzok8/small-package" >> feeds.conf.default
 
       - name: Update and install Feeds
