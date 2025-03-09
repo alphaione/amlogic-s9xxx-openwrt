@@ -200,7 +200,7 @@ rebuild_firmware() {
         \
         luci-app-amlogic luci-i18n-amlogic-zh-cn \
         luci-app-adguardhome luci-app-mosdns luci-app-quickstart luci-app-openclash luci-app-lucky luci-app-tailscale \
-        luci-theme-design luci-theme-argon \
+        luci-theme-design luci-theme-argon -luci-theme-bootstrap \
         \
         ${config_list} \
         "
