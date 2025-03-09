@@ -15,7 +15,7 @@ on:
       releases_branch:
         description: "Select the releases branch"
         required: false
-        default: "openwrt:24.10.0"
+        default: "immortalwrt:24.10.0"
         type: choice
         options:
           - openwrt:24.10.0
@@ -23,7 +23,7 @@ on:
       openwrt_board:
         description: "Select device board"
         required: false
-        default: "all"
+        default: "s905l3b-unt403a"
         type: choice
         options:
           - all
@@ -178,7 +178,7 @@ on:
       openwrt_kernel:
         description: "Select kernel version"
         required: false
-        default: "6.1.y_6.12.y"
+        default: "6.6.y_6.12.y"
         type: choice
         options:
           - 5.4.y
