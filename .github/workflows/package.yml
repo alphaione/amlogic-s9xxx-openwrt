@@ -1,0 +1,101 @@
+name: Build Small-Package Plugins
+
+on:
+  workflow_dispatch:
+    
+jobs:
+  build-plugins:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Small-Package
+        uses: actions/checkout@v4
+
+
+      - name: Initialization environment
+        id: init
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          docker rmi $(docker images -q) 2>/dev/null
+          [[ -n "${AGENT_TOOLSDIRECTORY}" ]] && sudo rm -rf "${AGENT_TOOLSDIRECTORY}"
+          sudo rm -rf /usr/share/dotnet /etc/apt/sources.list.d /usr/local/lib/android 2>/dev/null
+          sudo swapoff -a
+          sudo rm -f /swapfile /mnt/swapfile
+          sudo -E apt-get -y update
+          sudo -E apt-get -y purge azure-cli ghc* zulu* llvm* firefox google* dotnet* powershell openjdk* mongodb* moby* || true
+          sudo -E apt-get -y install $(curl -fsSL https://tinyurl.com/ubuntu2204-make-openwrt)
+          sudo -E systemctl daemon-reload
+          #sudo -E apt-get -y full-upgrade
+          sudo -E apt-get -y autoremove --purge
+          sudo -E apt-get clean
+          sudo sed -i '/NVM_DIR/d;/skel/d' /root/{.bashrc,.profile}
+          sudo rm -rf ~/{.cargo,.dotnet,.rustup}
+          sudo timedatectl set-timezone "${TZ}"
+          echo "status=success" >> ${GITHUB_OUTPUT}
+
+      - name: Create simulated physical disk
+        run: |
+          mnt_size=$(expr $(df -h /mnt | tail -1 | awk '{print $4}' | sed 's/[[:alpha:]]//g' | sed 's/\..*//') - 1)
+          root_size=$(expr $(df -h / | tail -1 | awk '{print $4}' | sed 's/[[:alpha:]]//g' | sed 's/\..*//') - 4)
+          sudo truncate -s "${mnt_size}"G /mnt/mnt.img
+          sudo truncate -s "${root_size}"G /root.img
+          sudo losetup /dev/loop6 /mnt/mnt.img
+          sudo losetup /dev/loop7 /root.img
+          sudo pvcreate /dev/loop6
+          sudo pvcreate /dev/loop7
+          sudo vgcreate github /dev/loop6 /dev/loop7
+          sudo lvcreate -n runner -l 100%FREE github
+          sudo mkfs.xfs /dev/github/runner
+          sudo mkdir -p /builder
+          sudo mount /dev/github/runner /builder
+          sudo chown -R runner.runner /builder
+          df -Th
+
+      - name: Add Feed to ImmortalWRT
+        run: |
+          git clone https://github.com/immortalwrt/immortalwrt openwrt
+          cd openwrt
+          > feeds.conf.default
+          echo "src-git smpackage https://github.com/kenzok8/small-package" >> feeds.conf.default
+
+      - name: Update and install Feeds
+        run: |
+          ./scripts/feeds update -a
+          rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd*,miniupnpd-iptables,wireless-regdb}
+          ./scripts/feeds install -a
+
+      - name: Build Configuration
+        run: |
+          make defconfig
+          make -j$(nproc) download
+          make package/feeds/smpackage/compile -j$(nproc) V=s  # 仅编译 smpackage 的包
+
+      - name: Archive Plugins
+        run: |
+          mkdir artifacts
+          cp -r openwrt/bin/packages/*/smpackage/*.ipk artifacts/
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: smpackage-plugins
+          path: artifacts/
+
+      
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
