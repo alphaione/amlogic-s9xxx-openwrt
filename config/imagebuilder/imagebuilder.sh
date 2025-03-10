@@ -129,14 +129,13 @@ custom_packages() {
 
     # Download other luci-app-xxx
     # ......
-BASE_URL="https://dl.openwrt.ai/releases/24.10/packages/aarch64_generic/kiddin9"
+    BASE_URL="https://dl.openwrt.ai/releases/24.10/packages/aarch64_generic/kiddin9"
 
-wget -q -O - "$BASE_URL" | \
-grep -oP 'href="\K[^"]*\.ipk' | \
-grep -E 'lucky|tailscale|mosdns|quickstart|adguardhome|openclash|v2dat|design|argon' | \
-sed "s|^|$BASE_URL/|" | \
-xargs -n 1 wget
-
+    wget -q -O - "$BASE_URL" | \
+    grep -oP 'href="\K[^"]*\.ipk' | \
+    grep -E 'lucky|tailscale|mosdns|quickstart|openclash|v2dat|design|argon' | \
+    sed "s|^|$BASE_URL/|" | \
+    xargs -n 1 wget
 
     sync && sleep 3
     echo -e "${INFO} [ packages ] directory status: $(ls -al 2>/dev/null)"
@@ -195,12 +194,12 @@ rebuild_firmware() {
         \
         luci luci-base luci-compat luci-i18n-base-zh-cn luci-lib-base luci-lib-docker \
         luci-lib-ip luci-lib-ipkg luci-lib-jsonc luci-lib-nixio luci-mod-admin-full luci-mod-network \
-        luci-mod-status luci-mod-system luci-proto-3g luci-proto-ipip luci-proto-ipv6 \
+        luci-mod-status luci-mod-system luci-proto-ipip luci-proto-ipv6 \
         luci-proto-ncm luci-proto-openconnect luci-proto-ppp luci-proto-qmi luci-proto-relay \
         \
         luci-app-amlogic luci-i18n-amlogic-zh-cn \
-        luci-app-adguardhome luci-app-mosdns luci-app-quickstart luci-app-openclash luci-app-lucky luci-app-tailscale \
-        luci-theme-design luci-theme-argon -luci-theme-bootstrap \
+        luci-app-mosdns luci-app-quickstart luci-app-openclash luci-app-lucky luci-app-tailscale \
+        luci-theme-design luci-theme-argon \
         \
         ${config_list} \
         "
