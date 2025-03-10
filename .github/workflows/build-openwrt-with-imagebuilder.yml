@@ -330,7 +330,8 @@ jobs:
           kernel_usage: ${{ inputs.kernel_usage }}
           builder_name: ${{ inputs.builder_name }}
 
-      - uses: actions/upload-artifact@main
+      - name: Upload artifact
+        uses: actions/upload-artifact@main
         with:
           name: Upload OpenWrt
           path: ${{ env.PACKAGED_OUTPUTPATH }}/*
