@@ -333,9 +333,7 @@ jobs:
       - uses: actions/upload-artifact@main
         with:
           name: Upload OpenWrt
-          path: |
-            imagebuilder/output/*
-            ${{ env.PACKAGED_OUTPUTPATH }}/*
+          path: ${{ env.PACKAGED_OUTPUTPATH }}/*
           
       - name: Upload the packaged OpenWrt
         uses: ncipollo/release-action@main
